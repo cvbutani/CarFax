@@ -1,11 +1,15 @@
 package sonic.star.carfax.data.network;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 import sonic.star.carfax.data.model.CarListing;
 
 /**
@@ -14,12 +18,11 @@ import sonic.star.carfax.data.model.CarListing;
  */
 public class RetrofitClient {
     private static IApiService mApiService;
-    private static final String BASE_URL = "https://api.myjson.com/bins/";
+    private static final String BASE_URL = "https://carfax-for-consumers.firebaseio.com/";
 
     public static IApiService getApiService() {
 
         if (mApiService == null) {
-
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(CarListing.class, new CarDeserializer())
                     .create();

@@ -1,6 +1,8 @@
 package sonic.star.carfax.data.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 /**
  * Created by Chirag on 2019-10-16 at 19:36
@@ -9,6 +11,8 @@ import androidx.room.Entity;
 @Entity
 public class CarListing implements ICarListing {
 
+    @PrimaryKey
+    @NonNull
     public String id;
     public String image;
     public int year;
@@ -30,6 +34,7 @@ public class CarListing implements ICarListing {
     }
 
     @Override
+    @NonNull
     public String getId() {
         return id;
     }

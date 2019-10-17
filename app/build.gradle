@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion versions.compileSdk
-    buildToolsVersion versions.buildTools
     defaultConfig {
         applicationId "sonic.star.carfax"
         minSdkVersion versions.minimumSdk
@@ -18,8 +17,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility versions.sourceCompat
+        targetCompatibility versions.targetCompat
     }
 }
 

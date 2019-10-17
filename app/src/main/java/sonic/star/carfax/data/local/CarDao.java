@@ -1,5 +1,6 @@
 package sonic.star.carfax.data.local;
 
+import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -14,6 +15,7 @@ import static androidx.room.OnConflictStrategy.REPLACE;
  * Created by Chirag on 2019-10-16 at 19:32
  * Project - CarFax
  */
+@Dao
 public interface CarDao {
     /**
      * Insert NBATeams in database

@@ -1,7 +1,5 @@
 package sonic.star.carfax.data;
 
-import android.provider.ContactsContract;
-
 import androidx.annotation.NonNull;
 
 import java.util.List;
@@ -41,7 +39,7 @@ public class DataManager {
 
             @Override
             protected Flowable<List<CarListing>> createCall() {
-                return mApiService.getCarListings();
+                return mApiService.getCarListings().map(data -> data.carListingLIst);
             }
 
             @Override

@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
+import sonic.star.carfax.data.model.CarFax;
 import sonic.star.carfax.data.model.CarListing;
 
 /**
@@ -12,6 +13,6 @@ import sonic.star.carfax.data.model.CarListing;
  */
 public interface IApiService {
 
-    @GET()
-    Flowable<List<CarListing>> getCarListings();
+    @GET("assignment.json")
+    Flowable<CarFax> getCarListings();
 }
