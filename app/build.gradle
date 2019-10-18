@@ -36,6 +36,9 @@ dependencies {
     implementation deps.square.gsonConverter
     implementation deps.facebook.stetho
 
+    implementation deps.rx.network
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     annotationProcessor deps.androidx.roomCompiler
 
     testImplementation deps.androidx.junit

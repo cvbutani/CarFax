@@ -29,6 +29,7 @@ buildscript {
             'rxJava'            : '2.2.9',
             'rxAndroid'         : '2.1.0',
             'retrofit'          : '2.6.2',
+            'pwittchen'         : '3.0.6',
 
             'stetho'            : '1.5.1'
     ]
@@ -61,7 +62,8 @@ buildscript {
 
             rx      : [
                     'java'   : "io.reactivex.rxjava2:rxjava:${versions.rxJava}",
-                    'android': "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}"
+                    'android': "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}",
+                    'network': "com.github.pwittchen:reactivenetwork-rx2:${versions.pwittchen}"
             ],
 
             square  : [

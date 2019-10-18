@@ -38,8 +38,8 @@ public class Repository {
         }
     }
 
-    public Flowable<List<CarListing>> getCarLists() {
-        return mDataManager.getCarListings();
+    public Flowable<List<CarListing>> getCarLists(boolean isConnected) {
+        return mDataManager.getCarListings(isConnected);
     }
 
 }

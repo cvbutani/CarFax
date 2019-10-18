@@ -23,7 +23,7 @@ public class DataManager {
         mApiService = service;
     }
 
-    Flowable<List<CarListing>> getCarListings() {
+    Flowable<List<CarListing>> getCarListings(boolean isConnected) {
         return new NetworkBoundResource<List<CarListing>, List<CarListing>>() {
 
             @Override
@@ -44,7 +44,7 @@ public class DataManager {
 
             @Override
             protected boolean shouldFetch() {
-                return true;
+                return isConnected;
             }
         }.asFlowable();
     }
