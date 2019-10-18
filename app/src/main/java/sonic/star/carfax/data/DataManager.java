@@ -44,7 +44,7 @@ public class DataManager {
 
             @Override
             protected boolean shouldFetch() {
-                return isConnected;
+                return true;
             }
         }.asFlowable();
     }

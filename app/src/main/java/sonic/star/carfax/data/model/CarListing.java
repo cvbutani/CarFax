@@ -2,6 +2,7 @@ package sonic.star.carfax.data.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
@@ -22,6 +23,7 @@ public class CarListing implements ICarListing {
     public int price;
     public long mileage;
     public String location;
+
     public long carDealerNumber;
     public String interiorColor;
     public String exteriorColor;
@@ -113,4 +115,5 @@ public class CarListing implements ICarListing {
     public String getBodyStyle() {
         return bodyStyle;
     }
+
 }

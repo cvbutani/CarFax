@@ -30,6 +30,7 @@ public class HomeViewModel extends AndroidViewModel {
     public HomeViewModel(@NonNull Application application) {
         super(application);
         context = application;
+        carList();
     }
 
     private void isConnected() {
@@ -42,7 +43,7 @@ public class HomeViewModel extends AndroidViewModel {
                 }));
     }
 
-    void carList() {
+    private void carList() {
         isConnected();
         Repository.getInstance()
                 .getCarLists(network)
@@ -70,5 +71,11 @@ public class HomeViewModel extends AndroidViewModel {
 
                     }
                 });
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        disposable.dispose();
     }
 }

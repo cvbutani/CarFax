@@ -1,5 +1,6 @@
 package sonic.star.carfax;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -12,9 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import sonic.star.carfax.databinding.DetailFragmentBinding;
+
 public class DetailFragment extends Fragment {
 
     private DetailViewModel mViewModel;
+    public DetailFragmentBinding mBinding;
 
     public static DetailFragment newInstance() {
         return new DetailFragment();
@@ -23,7 +27,8 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.detail_fragment, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.detail_fragment, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
