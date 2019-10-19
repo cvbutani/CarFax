@@ -1,7 +1,6 @@
 package sonic.star.carfax.adapter;
 
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 
@@ -26,17 +25,4 @@ public class CustomBindingAdapter {
                     .into(view);
         }
     }
-
-    @BindingAdapter({"bind:carYear", "bind:carMake", "bind:carModel", "bind:carTrim"})
-    public static void carName(TextView view, int year, String make, String model, String trim) {
-
-            view.setText(year + " " + make + " " + model + " " + trim);
-
-    }
-
-    @BindingAdapter({"bind:carPrice", "bind:carMileage"})
-    public static void carPriceMileage(TextView view, int price, long mileage) {
-        view.setText("$" +price + " | " + mileage + " mi");
-    }
-
 }

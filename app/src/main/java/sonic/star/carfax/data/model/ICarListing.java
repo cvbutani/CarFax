@@ -5,35 +5,9 @@ package sonic.star.carfax.data.model;
  * Project - CarFax
  */
 public interface ICarListing {
-    String getId();
-
-    String getCarimage();
-
-    int getYear();
 
     String getMake();
 
-    String getModel();
+    String getPriceMileage();
 
-    String getTrim();
-
-    int getPrice();
-
-    long getMileage();
-
-    String getLocation();
-
-    long getCarDealerNumber();
-
-    String getInteriorColor();
-
-    String getExteriorColor();
-
-    String getDriveType();
-
-    String getTransmission();
-
-    String getEngine();
-
-    String getBodyStyle();
 }

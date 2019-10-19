@@ -11,6 +11,7 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/detail_fragment_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -32,6 +33,12 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <ProgressBar
+            android:id="@+id/progress_loacing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -40,6 +47,8 @@
                 android:id="@+id/info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/margin_24"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -48,43 +57,42 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="60dp" />
+                    app:layout_constraintGuide_begin="@dimen/vertical_guide" />
 
                 <ImageView
                     android:id="@+id/car_image"
                     bind:imageUrl="@{carInfo.image}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_margin="@dimen/margin_16"
+                    android:contentDescription="@string/car_image"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/guideline_horizontal" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_name"
-                    bind:carMake="@{carInfo.make}"
-                    bind:carModel="@{carInfo.model}"
-                    bind:carTrim="@{carInfo.trim}"
-                    bind:carYear="@{carInfo.year}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
                     android:fontFamily="@font/rubik_medium"
-                    android:textSize="20sp"
+                    android:text="@{carInfo.getMake}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_20"
                     app:layout_constraintStart_toStartOf="@+id/car_image"
                     app:layout_constraintTop_toBottomOf="@+id/car_image"
                     tools:text="2016 NISSAN ALTIMA 2.5 SV PREMIMUM" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_price_mileage"
-                    bind:carMileage="@{carInfo.mileage}"
-                    bind:carPrice="@{carInfo.price}"
+                    android:text="@{carInfo.getPriceMileage}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/margin_8"
                     android:fontFamily="@font/rubik_bold"
-                    android:textSize="24sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_24"
                     app:layout_constraintStart_toStartOf="@+id/car_name"
                     app:layout_constraintTop_toBottomOf="@+id/car_name"
                     tools:text="$ 144444 | 333333 mi" />
@@ -92,8 +100,8 @@
                 <View
                     android:id="@+id/divider"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="16dp"
+                    android:layout_height="@dimen/divider"
+                    android:layout_margin="@dimen/margin_16"
                     android:background="@android:color/darker_gray"
                     app:layout_constraintEnd_toEndOf="@+id/car_price_mileage"
                     app:layout_constraintStart_toStartOf="@+id/car_price_mileage"
@@ -101,102 +109,76 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/vehicle_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/rubik_medium"
-                    android:text="Vehicle Info"
-                    android:textSize="16sp"
+                    style="@style/detail_fragment_textview"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:text="@string/vehicle_info"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="@+id/divider"
                     app:layout_constraintTop_toBottomOf="@+id/divider" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/rubik"
-                    android:text="Location"
-                    android:textSize="16sp"
+                    style="@style/detail_fragemnt_subtext"
+                    android:text="@string/location"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="@+id/vehicle_info"
                     app:layout_constraintTop_toBottomOf="@+id/vehicle_info" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_exterior_color"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik"
-                    android:text="Exterior Color"
-                    android:textSize="16sp"
+                    style="@style/detail_fragemnt_subtext"
+                    android:text="@string/exterior_color"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_16"
                     app:layout_constraintStart_toStartOf="@+id/car_location"
                     app:layout_constraintTop_toBottomOf="@+id/car_location" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_interior_color"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik"
-                    android:text="Interior Color"
-                    android:textSize="16sp"
+                    style="@style/detail_fragemnt_subtext"
+                    android:text="@string/interior_color"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="@+id/car_exterior_color"
                     app:layout_constraintTop_toBottomOf="@+id/car_exterior_color" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_drive_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik"
-                    android:text="Drive Type"
-                    android:textSize="16sp"
+                    style="@style/detail_fragemnt_subtext"
+                    android:text="@string/drive_type"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="@+id/car_interior_color"
                     app:layout_constraintTop_toBottomOf="@+id/car_interior_color" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_transmission"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik"
-                    android:text="Transmission"
-                    android:textSize="16sp"
+                    style="@style/detail_fragemnt_subtext"
+                    android:text="@string/transmission"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="@+id/car_drive_type"
                     app:layout_constraintTop_toBottomOf="@+id/car_drive_type" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_body_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik"
-                    android:text="Body Style"
-                    android:textSize="16sp"
+                    style="@style/detail_fragemnt_subtext"
+                    android:text="@string/body_style"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="@+id/car_transmission"
                     app:layout_constraintTop_toBottomOf="@+id/car_transmission" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_engine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik"
-                    android:text="Engine"
-                    android:textSize="16sp"
+                    style="@style/detail_fragemnt_subtext"
+                    android:text="@string/engine"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="@+id/car_body_style"
                     app:layout_constraintTop_toBottomOf="@+id/car_body_style" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_fuel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="24dp"
-                    android:fontFamily="@font/rubik"
-                    android:text="Fuel"
-                    android:textSize="16sp"
+                    style="@style/detail_fragemnt_subtext"
+                    android:layout_marginBottom="@dimen/margin_24"
+                    android:text="@string/fuel"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="@+id/car_engine"
                     app:layout_constraintTop_toBottomOf="@+id/car_engine" />
 
@@ -205,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_begin="179dp" />
+                    app:layout_constraintGuide_begin="@dimen/horizontal_guide" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_location_info"
@@ -213,6 +195,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/rubik"
                     android:text="@{carInfo.location}"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/guideline"
                     app:layout_constraintTop_toBottomOf="@+id/guideline"
@@ -220,81 +203,76 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_exterior_color_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik"
+                    style="@style/detail_fragemnt_subtext"
                     android:text="@{carInfo.exteriorColor}"
-                    android:textSize="16sp"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="@+id/car_location_info"
                     app:layout_constraintTop_toBottomOf="@+id/car_location_info" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_interior_color_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik"
+                    style="@style/detail_fragemnt_subtext"
                     android:text="@{carInfo.interiorColor}"
-                    android:textSize="16sp"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="@+id/car_exterior_color_info"
                     app:layout_constraintTop_toBottomOf="@+id/car_exterior_color_info" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_drive_type_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik"
+                    style="@style/detail_fragemnt_subtext"
                     android:text="@{carInfo.driveType}"
-                    android:textSize="16sp"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="@+id/car_interior_color_info"
                     app:layout_constraintTop_toBottomOf="@+id/car_interior_color_info" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_transmission_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik"
+                    style="@style/detail_fragemnt_subtext"
                     android:text="@{carInfo.transmission}"
-                    android:textSize="16sp"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="@+id/car_drive_type_info"
                     app:layout_constraintTop_toBottomOf="@+id/car_drive_type_info" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_body_style_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik"
+                    style="@style/detail_fragemnt_subtext"
                     android:text="@{carInfo.bodyStyle}"
-                    android:textSize="16sp"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="@+id/car_transmission_info"
                     app:layout_constraintTop_toBottomOf="@+id/car_transmission_info" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_engine_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik"
+                    style="@style/detail_fragemnt_subtext"
                     android:text="@{carInfo.engine}"
-                    android:textSize="16sp"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="@+id/car_body_style_info"
                     app:layout_constraintTop_toBottomOf="@+id/car_body_style_info" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/car_fuel_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik"
+                    style="@style/detail_fragemnt_subtext"
                     android:text="@{carInfo.fuel}"
-                    android:textSize="16sp"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="@+id/car_engine_info"
                     app:layout_constraintTop_toBottomOf="@+id/car_engine_info" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/car_dealer_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_16"
+                    android:fontFamily="@font/rubik_bold"
+                    android:text="@string/call_dealer"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintEnd_toEndOf="@+id/car_fuel"
+                    app:layout_constraintStart_toStartOf="@+id/car_fuel"
+                    app:layout_constraintTop_toBottomOf="@+id/car_fuel" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </ScrollView>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </layout>

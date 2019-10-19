@@ -7,7 +7,6 @@ import androidx.room.Query;
 import java.util.List;
 
 import io.reactivex.Maybe;
-import io.reactivex.Single;
 import sonic.star.carfax.data.model.CarListing;
 
 import static androidx.room.OnConflictStrategy.REPLACE;
@@ -19,22 +18,30 @@ import static androidx.room.OnConflictStrategy.REPLACE;
 @Dao
 public interface CarDao {
     /**
-     * Insert NBATeams in database
-     * @param teams to be added
+     * Insert car list in database
+     * @param list to be added
      */
     @Insert(onConflict = REPLACE)
-    void addCar(List<CarListing> teams);
+    void addCar(List<CarListing> list);
 
     /**
-     * Get all teams
+     * Get all car list
      * @return List of CarListing
      */
     @Query("SELECT * FROM CarListing")
     Maybe<List<CarListing>> getCarListings();
 
+    /**
+     * Get one car info based on id
+     * @param id - car id
+     * @return - car detail based on id
+     */
     @Query("SELECT * FROM carlisting where id=:id")
     Maybe<CarListing> getCarInfo(String id);
 
+    /**
+     * Delete carListing table info
+     */
     @Query("DELETE FROM CarListing")
     void deleteCarInfo();
 }

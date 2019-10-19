@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="text_24">24sp</dimen>
+    <dimen name="text_20">20sp</dimen>
+    <dimen name="text_16">16sp</dimen>
+    <dimen name="text_14">14sp</dimen>
+
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
+
+    <dimen name="divider">1dp</dimen>
+
+    <dimen name="vertical_guide">60dp</dimen>
+    <dimen name="horizontal_guide">179dp</dimen>
+
+    <dimen name="padding_60">60dp</dimen>
+
+</resources>

@@ -2,7 +2,6 @@ package sonic.star.carfax.data.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
@@ -37,84 +36,15 @@ public class CarListing implements ICarListing {
     }
 
     @Override
-    @NonNull
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public String getCarimage() {
-        return image;
-    }
-
-    @Override
-    public int getYear() {
-        return year;
-    }
-
-    @Override
     public String getMake() {
-        return make;
+        if (trim.equals("Unspecified")) {
+            return year + " " + make + " " + model;
+        }
+        return year + " " + make + " " + model + " " + trim;
     }
 
     @Override
-    public String getModel() {
-        return model;
+    public String getPriceMileage() {
+        return "$" +price + " | " + mileage + " mi";
     }
-
-    @Override
-    public String getTrim() {
-        return trim;
-    }
-
-    @Override
-    public int getPrice() {
-        return price;
-    }
-
-    @Override
-    public long getMileage() {
-        return mileage;
-    }
-
-    @Override
-    public String getLocation() {
-        return location;
-    }
-
-    @Override
-    public long getCarDealerNumber() {
-        return carDealerNumber;
-    }
-
-    @Override
-    public String getInteriorColor() {
-        return interiorColor;
-    }
-
-    @Override
-    public String getExteriorColor() {
-        return exteriorColor;
-    }
-
-    @Override
-    public String getDriveType() {
-        return driveType;
-    }
-
-    @Override
-    public String getTransmission() {
-        return transmission;
-    }
-
-    @Override
-    public String getEngine() {
-        return engine;
-    }
-
-    @Override
-    public String getBodyStyle() {
-        return bodyStyle;
-    }
-
 }

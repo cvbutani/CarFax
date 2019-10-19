@@ -1,4 +1,4 @@
-package sonic.star.carfax;
+package sonic.star.carfax.ui;
 
 import android.app.Application;
 
@@ -6,10 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import io.reactivex.Observer;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -21,11 +19,17 @@ public class DetailViewModel extends AndroidViewModel {
 
     private CompositeDisposable disposable = new CompositeDisposable();
     private MutableLiveData<CarListing> carInfo = new MutableLiveData<>();
+    MutableLiveData<String> error = new MutableLiveData<>();
 
     public DetailViewModel(@NonNull Application application) {
         super(application);
     }
 
+    /**
+     * Requests car detail and wrap it in MutableLiveData
+     *
+     * @return car detail
+     */
     LiveData<CarListing> getCar(String id) {
         Repository.getInstance()
                 .getCarInfoRepo(id)
@@ -45,7 +49,7 @@ public class DetailViewModel extends AndroidViewModel {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        error.setValue(e.getMessage());
                     }
 
                     @Override
@@ -54,5 +58,11 @@ public class DetailViewModel extends AndroidViewModel {
                     }
                 });
         return carInfo;
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        disposable.dispose();   // Always dispose disposable when app is closed.
     }
 }

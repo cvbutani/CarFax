@@ -34,26 +34,31 @@ dependencies {
     implementation deps.androidx.recyclerView
     implementation deps.androidx.room
     implementation deps.androidx.roomRxJava
-    implementation deps.rx.java
-    implementation deps.rx.android
+    implementation deps.androidx.legacySupport
+    implementation deps.androidx.lifecycleExtensions
+    implementation deps.androidx.navigationFragment
+    implementation deps.androidx.navigation
+
     implementation deps.square.retrofit
     implementation deps.square.retrofitRxAdapter
     implementation deps.square.gsonConverter
+
     implementation deps.facebook.stetho
+
     implementation deps.bumptech.glide
 
     implementation deps.google.material
     implementation deps.google.gson
 
+    implementation deps.rx.java
+    implementation deps.rx.android
     implementation deps.rx.network
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+
     annotationProcessor deps.androidx.roomCompiler
 
     testImplementation deps.androidx.junit
+
     androidTestImplementation deps.androidx.testRunner
     androidTestImplementation deps.androidx.espressoCore
     androidTestImplementation deps.androidx.testRules
-    implementation 'androidx.navigation:navigation-fragment:2.1.0'
-    implementation 'androidx.navigation:navigation-ui:2.1.0'
 }

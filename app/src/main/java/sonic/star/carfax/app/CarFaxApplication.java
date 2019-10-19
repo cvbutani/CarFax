@@ -45,7 +45,7 @@ public class CarFaxApplication extends Application {
                         .uncaughtException(Thread.currentThread(), e);
                 return;
             }
-            Log.w("Undeliverable exception received, not sure what to do", e);
+            Log.w("Undeliverable exception", e);
         });
 
         Repository.init(this);

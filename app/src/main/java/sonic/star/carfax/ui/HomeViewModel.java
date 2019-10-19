@@ -1,13 +1,11 @@
-package sonic.star.carfax;
+package sonic.star.carfax.ui;
 
 import android.app.Application;
-import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
-import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
 
 import java.util.List;
 
@@ -18,35 +16,28 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import sonic.star.carfax.data.Repository;
 import sonic.star.carfax.data.model.CarListing;
+import sonic.star.carfax.util.NetworkUtil;
 
 public class HomeViewModel extends AndroidViewModel {
 
-    private boolean network;
-    private Context context;
     private CompositeDisposable disposable = new CompositeDisposable();
-    MutableLiveData<List<CarListing>> listing = new MutableLiveData<>();
+    private MutableLiveData<List<CarListing>> listing = new MutableLiveData<>();
     MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
-        context = application;
         carList();
     }
 
-    private void isConnected() {
-        disposable.add(ReactiveNetwork
-                .observeNetworkConnectivity(context)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(connectivity -> {
-                    network = connectivity.available();
-                }));
-    }
-
-    private void carList() {
-        isConnected();
+    /**
+     * Requests carListing and wrap it in MutableLiveData
+     *
+     * @return carListing list
+     */
+    LiveData<List<CarListing>> carList() {
+        NetworkUtil util = new NetworkUtil(getApplication());
         Repository.getInstance()
-                .getCarLists(network)
+                .getCarLists(util.checkCellularNetwork())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .toObservable()
@@ -71,11 +62,12 @@ public class HomeViewModel extends AndroidViewModel {
 
                     }
                 });
+        return listing;
     }
 
     @Override
     protected void onCleared() {
         super.onCleared();
-        disposable.dispose();
+        disposable.dispose();   // Always dispose disposable when app is closed.
     }
 }
