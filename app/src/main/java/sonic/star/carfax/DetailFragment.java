@@ -8,7 +8,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ public class DetailFragment extends Fragment {
 
     private DetailViewModel mViewModel;
     public DetailFragmentBinding mBinding;
+    private String id;
 
     public static DetailFragment newInstance() {
         return new DetailFragment();
@@ -27,7 +30,12 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        if (getArguments() != null) {
+            id = DetailFragmentArgs.fromBundle(getArguments()).getId();
+        }
         mBinding = DataBindingUtil.inflate(inflater, R.layout.detail_fragment, container, false);
+        mBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        mBinding.toolbar.setNavigationOnClickListener(view -> Navigation.findNavController(view).navigate(DetailFragmentDirections.actionDetailFragmentToHomeFragment()));
         return mBinding.getRoot();
     }
 
@@ -35,7 +43,17 @@ public class DetailFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(DetailViewModel.class);
-        // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        displayCarInfo();
+    }
+
+    private void displayCarInfo() {
+        mViewModel.getCar(id).observe(this, car -> {
+            mBinding.setCarInfo(car);
+        });
+    }
 }

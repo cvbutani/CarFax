@@ -3,6 +3,7 @@ apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
     defaultConfig {
         applicationId "sonic.star.carfax"
         minSdkVersion versions.minimumSdk
@@ -46,7 +47,7 @@ dependencies {
 
     implementation deps.rx.network
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     annotationProcessor deps.androidx.roomCompiler
 
     testImplementation deps.androidx.junit

@@ -7,6 +7,7 @@ import androidx.room.Query;
 import java.util.List;
 
 import io.reactivex.Maybe;
+import io.reactivex.Single;
 import sonic.star.carfax.data.model.CarListing;
 
 import static androidx.room.OnConflictStrategy.REPLACE;
@@ -30,6 +31,9 @@ public interface CarDao {
      */
     @Query("SELECT * FROM CarListing")
     Maybe<List<CarListing>> getCarListings();
+
+    @Query("SELECT * FROM carlisting where id=:id")
+    Maybe<CarListing> getCarInfo(String id);
 
     @Query("DELETE FROM CarListing")
     void deleteCarInfo();

@@ -69,6 +69,9 @@ public class CarDeserializer implements JsonDeserializer<CarListing> {
         JsonElement bodyStyleElement = listObject.getAsJsonObject().get("bodytype");
         carListing.bodyStyle = getStringOrEmpty(bodyStyleElement);
 
+        JsonElement fuelElement = listObject.getAsJsonObject().get("fuel");
+        carListing.fuel = getStringOrEmpty(fuelElement);
+
         JsonObject delaerObject = listObject.getAsJsonObject().getAsJsonObject("dealer");
 
         JsonElement dealerElement = delaerObject.get("phone");
@@ -89,7 +92,7 @@ public class CarDeserializer implements JsonDeserializer<CarListing> {
         if (imageObject != null) {
             JsonObject firstPhotoObject = imageObject.getAsJsonObject("firstPhoto");
             if (firstPhotoObject != null) {
-                imageElement = firstPhotoObject.get("medium");
+                imageElement = firstPhotoObject.get("large");
             } else {
                 imageElement = null;
             }

@@ -1,8 +1,11 @@
 package sonic.star.carfax.adapter;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -28,6 +31,16 @@ import sonic.star.carfax.databinding.HomeRecyclerItemBinding;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     private List<CarListing> carInfo;
+    private OnItemClickListener clickListener;
+
+
+    public interface OnItemClickListener {
+        void onItemCLicked(Long number);
+    }
+
+     public HomeAdapter(OnItemClickListener listener){
+            clickListener = listener;
+    }
 
     @NonNull
     @Override
@@ -42,6 +55,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         holder.mItemBinding.setCarInfo(carInfo.get(position));
         holder.mItemBinding.carCard.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(carInfo.get(position).id));
+        });
+        holder.mItemBinding.carDealerNumber.setOnClickListener(v -> {
+            clickListener.onItemCLicked(carInfo.get(position).carDealerNumber);
         });
     }
 

@@ -48,4 +48,8 @@ public class DataManager {
             }
         }.asFlowable();
     }
+
+    Flowable<CarListing> getCarInfoFromDb(String id) {
+        return mDatabase.carDao().getCarInfo(id).toFlowable();
+    }
 }

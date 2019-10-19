@@ -42,4 +42,8 @@ public class Repository {
         return mDataManager.getCarListings(isConnected);
     }
 
+    public Flowable<CarListing> getCarInfoRepo(String id) {
+        return mDataManager.getCarInfoFromDb(id);
+    }
+
 }

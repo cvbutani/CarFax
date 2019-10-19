@@ -31,6 +31,7 @@ public class CarListing implements ICarListing {
     public String transmission;
     public String engine;
     public String bodyStyle;
+    public String fuel;
 
     public CarListing() {
     }

@@ -83,6 +83,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/car_location"
                 app:layout_constraintStart_toStartOf="@+id/car_location"
                 app:layout_constraintTop_toBottomOf="@+id/car_location" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
